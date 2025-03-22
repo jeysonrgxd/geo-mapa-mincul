@@ -2,133 +2,154 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
-  <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="./style.css">
 </head>
 
-<body >
+<body>
 
 
-  <h2 class="titulo">PRIMER ENTREGABLE MAPA 1.0</h2>
+    <h2 class="titulo">PRIMER ENTREGABLE MAPA 1.0</h2>
 
-  <div id="map" style="width: 100vw; height: 100vh;"></div>
+    <div id="map" style="width: 100vw; height: 100vh;"></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
-
-
-
-  <script>
-// Asegúrate de incluir Leaflet en tu HTML antes de usar este código
-// <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-// <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
 
 
-// Crear el mapa centrado en Perú
-var map = L.map('map').setView([-9.19, -75.0152], 5);
+    <script>
+        // Asegúrate de incluir Leaflet en tu HTML antes de usar este código
+        // <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+        // <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
 
-// Agregar capa de mapa satelital realista (ESRI World Imagery)
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-    attribution: '&copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
-}).addTo(map);
 
-// Generar datos aleatorios para departamentos con más datos
-var departamentos = [
-    { name: "Lima", lat: -12.0464, lng: -77.0428, value: Math.floor(Math.random() * 500) },
-    { name: "Arequipa", lat: -16.409, lng: -71.537, value: Math.floor(Math.random() * 500) },
-    { name: "Cusco", lat: -13.5319, lng: -71.9675, value: Math.floor(Math.random() * 500) },
-    { name: "Piura", lat: -5.1945, lng: -80.6328, value: Math.floor(Math.random() * 500) },
-    { name: "Trujillo", lat: -8.11599, lng: -79.02998, value: Math.floor(Math.random() * 500) },
-    { name: "Iquitos", lat: -3.7491, lng: -73.2538, value: Math.floor(Math.random() * 500) },
-    { name: "Chiclayo", lat: -6.7714, lng: -79.8409, value: Math.floor(Math.random() * 500) },
-    { name: "Tacna", lat: -18.0066, lng: -70.2463, value: Math.floor(Math.random() * 500) }
-];
 
-// Generar datos aleatorios para distritos con más cantidad
-var distritos = [];
-var nombresDistritos = ["Miraflores", "San Isidro", "Cercado de Lima", "Los Olivos", "San Juan de Lurigancho", "Surco", "San Borja", "La Molina", "Pueblo Libre", "Magdalena", "Comas", "Villa María del Triunfo", "Chorrillos", "San Miguel", "San Martín de Porres", "Ate", "El Agustino", "Jesús María", "Barranco"];
+        // Crear el mapa centrado en Perú
+        var map = L.map('map').setView([-9.19, -75.0152], 5);
 
-for (let i = 0; i < 50; i++) {
-    distritos.push({
-        name: nombresDistritos[Math.floor(Math.random() * nombresDistritos.length)],
-        lat: -12 + Math.random() * 4, // Variación en latitud
-        lng: -77 + Math.random() * 4, // Variación en longitud
-        value: Math.floor(Math.random() * 200)
-    });
-}
+        // Agregar capa de mapa satelital realista (ESRI World Imagery)
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+        }).addTo(map);
 
-// Crear grupos de clusters para departamentos y distritos
-var clusterDepartamentos = L.markerClusterGroup();
-var clusterDistritos = L.markerClusterGroup();
+        // Generar datos aleatorios para departamentos con más datos
+        var departamentos = [
+            { name: "Lima", lat: -12.0464, lng: -77.0428, value: Math.floor(Math.random() * 500) },
+            { name: "Arequipa", lat: -16.409, lng: -71.537, value: Math.floor(Math.random() * 500) },
+            { name: "Cusco", lat: -13.5319, lng: -71.9675, value: Math.floor(Math.random() * 500) },
+            { name: "Piura", lat: -5.1945, lng: -80.6328, value: Math.floor(Math.random() * 500) },
+            { name: "Trujillo", lat: -8.11599, lng: -79.02998, value: Math.floor(Math.random() * 500) },
+            { name: "Iquitos", lat: -3.7491, lng: -73.2538, value: Math.floor(Math.random() * 500) },
+            { name: "Chiclayo", lat: -6.7714, lng: -79.8409, value: Math.floor(Math.random() * 500) },
+            { name: "Tacna", lat: -18.0066, lng: -70.2463, value: Math.floor(Math.random() * 500) }
+        ];
 
-// Función para agregar marcadores con clustering y popups
-function agregarMarcadores(data, clusterGroup) {
-    data.forEach(d => {
-        var icon = L.divIcon({
-            className: 'custom-marker',
-            html: `<div class="circle">${d.value}</div>`,
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
-        });
-        
-        var marker = L.marker([d.lat, d.lng], { icon: icon });
-        marker.bindPopup(`<b>${d.name}</b><br>Incidencias: ${d.value}`);
-        clusterGroup.addLayer(marker);
-    });
-}
+        // Generar datos aleatorios para distritos con más cantidad
+        var distritos = [];
+        var nombresDistritos = ["Miraflores", "San Isidro", "Cercado de Lima", "Los Olivos", "San Juan de Lurigancho", "Surco", "San Borja", "La Molina", "Pueblo Libre", "Magdalena", "Comas", "Villa María del Triunfo", "Chorrillos", "San Miguel", "San Martín de Porres", "Ate", "El Agustino", "Jesús María", "Barranco"];
 
-// Agregar marcadores iniciales (departamentos)
-agregarMarcadores(departamentos, clusterDepartamentos);
-map.addLayer(clusterDepartamentos);
-
-// Manejar el cambio de zoom para mostrar distritos con clustering
-map.on('zoomend', function () {
-    if (map.getZoom() >= 10) {
-        if (!map.hasLayer(clusterDistritos)) {
-            clusterDistritos.clearLayers();
-            agregarMarcadores(distritos, clusterDistritos);
-            map.addLayer(clusterDistritos);
+        for (let i = 0; i < 50; i++) {
+            distritos.push({
+                name: nombresDistritos[Math.floor(Math.random() * nombresDistritos.length)],
+                lat: -12 + Math.random() * 4,
+                lng: -77 + Math.random() * 4,
+                value: Math.floor(Math.random() * 200)
+            });
         }
-    } else {
-        map.removeLayer(clusterDistritos);
-    }
-});
 
-// Hacer zoom al hacer clic en un cluster
-clusterDepartamentos.on('clusterclick', function (event) {
-    var latlng = event.latlng;
-    map.setView(latlng, Math.min(map.getZoom() + 2, 12)); // Ajusta el zoom hasta dispersar los clusters correctamente
-});
+        // Crear grupos de clusters para departamentos y distritos
+        var clusterDepartamentos = L.markerClusterGroup();
+        var clusterDistritos = L.markerClusterGroup();
 
-// Agregar estilos CSS para los números dentro de los círculos
-var style = document.createElement('style');
-style.innerHTML = `
-.custom-marker .circle {
-    width: 30px;
-    height: 30px;
-    background-color: red;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 50%;
-    text-shadow: 1px 1px 2px black;
-    border: 2px solid white;
-}`;
-document.head.appendChild(style);
+        // Función para generar código DAS ficticio
+        function generarCodigoDAS() {
+            return "DAS-" + Math.floor(1000 + Math.random() * 9000);
+        }
+
+        // Función para obtener un nombre de proyecto aleatorio
+        function obtenerNombreProyecto() {
+            var nombres = ["Proyecto Seguridad", "Infraestructura Urbana", "Plan de Salud", "Educación para Todos", "Desarrollo Ambiental", "Innovación Tecnológica"];
+            return nombres[Math.floor(Math.random() * nombres.length)];
+        }
+
+        // Función para agregar marcadores con clustering y popups
+        function agregarMarcadores(data, clusterGroup) {
+            data.forEach(d => {
+                var icon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div class="circle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 281 297">
+  <!-- Generator: Adobe Illustrator 28.7.1, SVG Export Plug-In . SVG Version: 1.2.0 Build 142)  -->
+  <g>
+    <g id="Capa_1">
+      <g>
+        <path d="M192.2,126.2c-4.6,27.1-26.7,44.4-50.8,44.9-23.8.5-47.8-16.2-52.7-44.9-.8,0-1.7,0-2.6,0-6.6,0-13.1,0-19.7,0-5.6,0-8.7-3.7-8.1-9.2,1.4-12.4,10.5-20.6,23-20.7,12.1,0,24.1,0,36.2,0,27.2,0,54.4,0,81.6,0,9.7,0,17.1,3.9,21.4,12.8,1.4,3,2,6.5,2.3,9.8.3,4.2-3.2,7.3-7.7,7.4-6.7,0-13.3,0-20,0-.9,0-1.8,0-2.8,0ZM104.1,126.3c2.3,14.6,17.1,31.1,38.9,29.8,16.5-1,33.8-16.3,33.7-29.8h-72.7Z"/>
+        <path d="M192.8,81.1h-104.6c-1.4-21.3,5.3-38.9,23.1-51.1,17.3-11.8,35.9-12.8,54.2-2.6,20.6,11.5,28.7,30.2,27.4,53.6Z"/>
+        <path d="M73,174v102c-9.1,0-18.1.7-26.9-.2-9.8-1-17.3-10-17.7-20.6-.4-10.8-.6-21.7.4-32.4,1.6-17.1,10.6-30.2,25.3-39.1,6-3.6,12.5-6.5,19-9.8Z"/>
+        <path d="M208,174c10.5,5.8,21.7,9.5,30,18.4,8.6,9.2,13.8,20,14.6,32.5.6,10.1.6,20.3,0,30.4-.6,11.9-9.1,20.3-21,21-7.8.5-15.6,0-23.6,0v-102.4Z"/>
+        <path d="M132.9,276.3h-44.7c0-.9-.1-1.7-.1-2.5,0-35,0-70,0-105,0-1.4,0-2.5,1.6-3.2,1.4-.6,2.3-.5,3.5.5,2.8,2.7,6,5.1,8.8,7.7.7.7,1.2,2.1,1.2,3.2,0,13,4.9,23.6,15.2,31.5,4.3,3.3,9.3,5.4,14.7,6.7v61.1Z"/>
+        <path d="M148.1,215.3c8.9-2,16.3-6.6,21.9-13.8,5.4-7,8-14.9,7.8-23.7,0-2.2.6-3.6,2.4-4.9,2.8-2,5.2-4.6,7.9-6.8.6-.5,1.8-.8,2.5-.6,1.1.3,2.3.7,2.3,2.4,0,20.8,0,41.6,0,62.4,0,.2,0,.3-.2.8h-3c-5.8,0-11.6,0-17.5,0-5.7,0-9.2,2.9-9.2,7.5,0,4.6,3.5,7.4,9.3,7.4,6,0,12,0,18,0h2.6v30.3h-44.6v-61Z"/>
+        <path d="M118.7,182.2c15.9,5,27.5,5.1,43.5,0,.2,6.7-7.4,17.8-20.3,18.7-11.1.8-22-7.8-23.2-18.8Z"/>
+      </g>
+    </g>
+  </g>
+</svg></div>`,
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                });
+
+                var popupContent = `
+            <div class="popup-content">
+                <p><strong>Nombre de proyecto:</strong> ${obtenerNombreProyecto()}</p>
+                <p><strong>Dep/Prov/Dist:</strong> ${d.name}</p>
+                <p class="codigodas"><strong>Código DAS:</strong> ${generarCodigoDAS()}</p>
+                <a href="./Doc1.pdf" download class="download-btn">Descargar Informe</a>
+            </div>
+        `;
+
+                var marker = L.marker([d.lat, d.lng], { icon: icon });
+                marker.bindPopup(popupContent);
+                clusterGroup.addLayer(marker);
+            });
+        }
+
+        // Agregar marcadores iniciales (departamentos)
+        agregarMarcadores(departamentos, clusterDepartamentos);
+        map.addLayer(clusterDepartamentos);
+
+        // Manejar el cambio de zoom para mostrar distritos con clustering
+        map.on('zoomend', function () {
+            if (map.getZoom() >= 10) {
+                if (!map.hasLayer(clusterDistritos)) {
+                    clusterDistritos.clearLayers();
+                    agregarMarcadores(distritos, clusterDistritos);
+                    map.addLayer(clusterDistritos);
+                }
+            } else {
+                map.removeLayer(clusterDistritos);
+            }
+        });
+
+        // Hacer zoom al hacer clic en un cluster
+        clusterDepartamentos.on('clusterclick', function (event) {
+            var latlng = event.latlng;
+            map.setView(latlng, Math.min(map.getZoom() + 2, 12));
+        });
 
 
 
-  </script>
+
+
+
+
+    </script>
 
 </body>
 

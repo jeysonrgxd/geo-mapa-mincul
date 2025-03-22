@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+
+    <h2 class="titulo">PRIMER ENTREGABLE MAPA 1.0</h2>
+
+    <div id="map" style="width: 100vw; height: 100vh;"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+
+
+
+    <script>
+
+        // Asegúrate de incluir Leaflet en tu HTML antes de usar este código
+        // Crear el mapa centrado en Perú
+        var map = L.map('map').setView([-9.19, -75.0152], 6);
+
+        // Agregar capa de mapa satelital realista (ESRI World Imagery)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; Esri &mdash; Source: Esri, Maxar, Earthstar Geographics, and the GIS User Community'
+        }).addTo(map);
+
+        // Generar datos aleatorios para departamentos con más datos
+        var departamentos = [
+            { name: "Lima", lat: -12.0464, lng: -77.0428, value: Math.floor(Math.random() * 500) },
+            { name: "Arequipa", lat: -16.409, lng: -71.537, value: Math.floor(Math.random() * 500) },
+            { name: "Cusco", lat: -13.5319, lng: -71.9675, value: Math.floor(Math.random() * 500) },
+            { name: "Piura", lat: -5.1945, lng: -80.6328, value: Math.floor(Math.random() * 500) },
+            { name: "Trujillo", lat: -8.11599, lng: -79.02998, value: Math.floor(Math.random() * 500) },
+            { name: "Iquitos", lat: -3.7491, lng: -73.2538, value: Math.floor(Math.random() * 500) },
+            { name: "Chiclayo", lat: -6.7714, lng: -79.8409, value: Math.floor(Math.random() * 500) },
+            { name: "Tacna", lat: -18.0066, lng: -70.2463, value: Math.floor(Math.random() * 500) }
+        ];
+
+        // Función para obtener el color según la cantidad de incidencias
+        function obtenerColor(value) {
+            if (value > 300) return 'red';
+            if (value > 150) return 'rgb(255, 227, 51)';
+            return 'green';
+        }
+
+        let primerRojo = false;
+
+        // Función para agregar marcadores sin clustering
+        function agregarMarcadores(data) {
+            data.forEach((d, x) => {
+
+                var color = obtenerColor(d.value);
+                var icon;
+                if (d.value > 300 && !primerRojo) {
+
+                    primerRojo = true;
+
+                    icon = L.divIcon({
+                        className: 'custom-marker',
+                        html: `<div class="circle ${color}" style="--animatecolor: ${color};">${d.value}</div>`,
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15]
+                    });
+
+                } else {
+
+                    icon = L.divIcon({
+                        className: 'custom-marker',
+                        html: `<div class="circle" style="--animatecolor: ${color};">${d.value}</div>`,
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15]
+                    });
+
+                }
+
+                var marker = L.marker([d.lat, d.lng], { icon: icon });
+                marker.bindPopup(`<b>${d.name}</b><br>Incidencias: ${d.value}`);
+                marker.addTo(map);
+
+            });
+        }
+
+        // Agregar marcadores al mapa
+        agregarMarcadores(departamentos);
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
